@@ -13,64 +13,61 @@ a file and create a bar graph with set values for star ina  range from
 using namespace std;
 //Precondition: include library iostream
 //Postcondition: Ouputs the Header to Screen
-float heading();
+void heading();
 
 //Precondition: fstream, string, iomanip,iostream, pos(), neg(), stored values at temp 
 //Postcondition: Gets called to main and outputs graph 
-float fileinput();
+void bargraph ();
 
 //Precondition:iostream, int temp, int star, int starR
 //Postcondition:Gets called to fileinput to round up or not on stars
-float filecalculations();
+void starpos();
 
-//Precondition:int star
+//Precondition:iostream, iomanip, pos, fileinput, starpos, and output must be called, Store values in temp 
 //Postcondition: Output stars for 1/3 the original positive value, called in pos()
-float staroutput();
+void staroutput();
 
 //Precondition: int star
 //Postcondition: Output star for 1/3 the original negative value, called in neg()
-float staroutputNeg();
+void staroutputNeg();
 
 //Precondition:iostream, iomanip,Fileinput, pos, filecalculations
-//Postcondition: Sets width at zero and outputs line
-float output();
+//Postcondition: Sets width at zero and outputs line for positive numbers
+void output();
+
+//Precondition: iostream, iomanip,Fileinput, neg, filecalculations
+//Postcondition:Sets width at zero and outputs line for negative numbers
+void outputNeg();
 
 //Precondition:
 //Postcondition:
-float outputNeg();
+void starNeg();
 
 //Precondition:
 //Postcondition:
-float starNeg();
+void pos();
 
 //Precondition:
 //Postcondition:
-float pos();
-
-//Precondition:
-//Postcondition:
-float neg();
+void neg();
 string input = "Temperatur.dat";
 ofstream outfile;
 string readin; 
-int i;
 int temp;
 int star;
-int starR;
 
 int main()
 {
 	heading();
-	fileinput();
+	bargraph();
 	return 0;
 }
-float heading()
+void heading()
 {
 	cout << "Temperature per hours (Each Star represents 3 degrees)\n";
 	cout << setw(10) << "-30" << setw(10) << "0" << setw(10) << "30" << setw(10) << "60" << setw(10) << "90" << setw(10) << "120" << endl;
-	return 0;
 }
-float fileinput()
+void bargraph()
 {
 	ifstream infile;
 	infile.open(input);
@@ -89,45 +86,44 @@ float fileinput()
 		cout << endl;
 	}
 	infile.close();
-	return 0;
 }
-float filecalculations()
+void starpos()
 {
+	int starR;
 	star = temp / 3;
 	starR = temp % 3;
 	if (starR == 2)
 	{
 		star = star + 1;
 	}
-	return 0;
 }
-float starNeg()
+void starNeg()
 {
+	int starR;
 	star = -temp / 3;
 	starR = -temp % 3;
 	if (starR == 2)
 	{
 		star = star + 1;
 	}
-	return 0;
 }
-float staroutput()
+void staroutput()
 {
+	int i;
 	for (int i = 1; i <= star; i++)
 	{
 		cout << "*";
 	}
-	return 0;
 }
-float staroutputNeg()
+void staroutputNeg()
 {
+	int i;
 	for (int i = 1;i <= star; i++)
 	{ ;
 		cout << "*";;
 	}
-	return 0;
 }
-float output()
+void output()
 {
 	if (temp < 100 && temp > 9)
 		cout << setw(18) << "|";
@@ -135,29 +131,26 @@ float output()
 		cout << setw(19) << "|";
 	if (temp < 121 && temp > 99)
 		cout << setw(17) << "|";
-	return 0;
 }
-float outputNeg()
+void outputNeg()
 {
 	if (temp <= -10 && temp >= -30)
 		cout << setw(17 - star); 
 	if (temp < 0 && temp >= -9)
 		cout << setw(17 - star);
-	return 0;
 }
-float pos()
+void pos()
 {
 	if (temp >= 0 && temp <= 120)
 	{
 
 		cout << temp << setw(15);
-		filecalculations();
+		starpos();
 		output();
 		staroutput();
 	}
-	return 0;
 }
-float neg()
+void neg()
 {
 	if (temp >= -30 && temp <= -1)
 	{
@@ -167,5 +160,4 @@ float neg()
 		staroutputNeg();
 		cout << "|";
 	}
-	return 0;
 }
