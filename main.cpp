@@ -59,7 +59,6 @@ string input = "Temperatur.dat";
 ofstream outfile;
 string readin; 
 
-
 int main()
 {//Initializes the variables; temp, star, and i
  //combines everything to creat the bar graph and heading
